@@ -1,18 +1,20 @@
 package com.example.ponto.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
+    @Column (name = "id")
     private Integer id;
+    @Column (name = "nome")
     private String nome;
+    @Column(name = "sobrenome")
     private String sobrenome;
+    @Column(name = "login")
     private String login;
+    @Column(name = "senha")
     private String senha;
 
     public Usuario() {

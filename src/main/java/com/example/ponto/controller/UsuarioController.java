@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping(value = "/usuario")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
+
 
     @GetMapping
     public ResponseEntity<Usuario> findAll() {
@@ -18,9 +20,21 @@ public class UsuarioController {
         return ResponseEntity.ok().body(teste);
     }
 
-    @PostMapping
+    @PostMapping ("/{id}")
     public ResponseEntity<Usuario> registro(@RequestBody Usuario obj){
         obj = usuarioService.registro(obj);
         return ResponseEntity.ok().body(obj);
     }
+    @PutMapping ("/{id}")
+    public ResponseEntity<Usuario> atualizar(@PathVariable Integer id, @RequestBody Usuario obj){
+        obj= usuarioService.atualizar(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        usuarioService.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

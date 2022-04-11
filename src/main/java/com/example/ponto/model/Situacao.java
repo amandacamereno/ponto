@@ -1,9 +1,8 @@
 package com.example.ponto.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 public class Situacao {
     @Id
@@ -12,6 +11,11 @@ public class Situacao {
     private Integer id;
     @Column (name = "nome")
     private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "ponto_id")
+    @JsonBackReference
+    private Ponto ponto;
 
     public Situacao() {
     }

@@ -1,6 +1,10 @@
 package com.example.ponto.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "usuario")
 public class Usuario {
@@ -16,6 +20,11 @@ public class Usuario {
     private String login;
     @Column(name = "senha")
     private String senha;
+
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_empresa")
+    private Empresa empresa;
 
     public Usuario() {
     }

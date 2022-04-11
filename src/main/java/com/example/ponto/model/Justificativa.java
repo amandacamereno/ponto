@@ -1,9 +1,9 @@
 package com.example.ponto.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.util.List;
 
 
 public class Justificativa {
@@ -13,6 +13,10 @@ public class Justificativa {
     private Integer id;
     @Column (name = "textojus")
     private String textojus;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_ponto")
+    private Ponto ponto;
 
     public Justificativa() {
     }

@@ -26,14 +26,14 @@ public class UsuarioService {
         return usuarioRepository.save(obj);
     }
 
-    public void deletar(Integer id) {usuarioRepository.deleteById(id);
-    }
 
     public Usuario atualizar(Integer id,Usuario obj) {
        Usuario usuario = usuarioRepository.getOne(id);
         updateData(usuario,obj);
         return usuarioRepository.save(usuario);
     }
+
+    public void deletar(Integer id) {usuarioRepository.deleteById(id);}
 
     private void updateData(Usuario usuario, Usuario obj) {
         usuario.setNome(obj.getNome());

@@ -1,6 +1,5 @@
 package com.example.ponto.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 

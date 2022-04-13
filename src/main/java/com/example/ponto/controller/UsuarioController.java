@@ -15,7 +15,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Usuario>findById(@PathVariable Integer id){
         Usuario obj = usuarioService.findById(id);
         return ResponseEntity.ok().body(obj);

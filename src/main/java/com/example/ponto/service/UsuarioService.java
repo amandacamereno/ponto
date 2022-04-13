@@ -18,8 +18,8 @@ public class UsuarioService {
     public List<Usuario> findAll() {return usuarioRepository.findAll();}
 
     public Usuario findById(Integer id) {
-        Optional<Usuario> filme = usuarioRepository.findById(id);
-        return filme.get();
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        return usuario.get();
     }
 
     public Usuario registro (Usuario obj){

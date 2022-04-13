@@ -2,6 +2,7 @@ package com.example.ponto.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,7 +22,6 @@ public class Usuario {
     @Column(name = "senha")
     private String senha;
 
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
@@ -29,12 +29,14 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nome, String sobrenome, String login, String senha) {
+    public Usuario(Integer id, String nome, String sobrenome, String login, String senha, Empresa empresa) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.login = login;
         this.senha = senha;
+        this.empresa = empresa;
+
     }
 
     public Integer getId() {
@@ -75,5 +77,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }

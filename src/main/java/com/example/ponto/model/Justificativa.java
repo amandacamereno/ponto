@@ -21,9 +21,10 @@ public class Justificativa {
     public Justificativa() {
     }
 
-    public Justificativa(Integer id, String textojus) {
+    public Justificativa(Integer id, String textojus, Ponto ponto) {
         this.id = id;
         this.textojus = textojus;
+        this.ponto = ponto;
     }
 
     public Integer getId() {
@@ -40,5 +41,13 @@ public class Justificativa {
 
     public void setTextojus(String textojus) {
         this.textojus = textojus;
+    }
+
+    public void setPonto(Ponto ponto) {
+        this.ponto = ponto;
+    }
+
+    public Ponto getPonto() {
+        return ponto;
     }
 }

@@ -12,10 +12,7 @@ public class Situacao {
     @Column (name = "nome")
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "ponto_id")
-    @JsonBackReference
-    private Ponto ponto;
+
 
     public Situacao() {
     }
@@ -23,6 +20,7 @@ public class Situacao {
     public Situacao(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
+
     }
 
     public Integer getId() {
@@ -40,4 +38,5 @@ public class Situacao {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 }

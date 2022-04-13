@@ -52,4 +52,12 @@ public class Ponto {
     public Situacao getSituacao() {return situacao;}
 
     public void setSituacao(Situacao situacao) {this.situacao = situacao;}
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

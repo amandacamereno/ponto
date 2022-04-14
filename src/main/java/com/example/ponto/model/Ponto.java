@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.util.List;
 
-
+@Entity(name = "ponto")
 public class Ponto {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
@@ -15,12 +15,12 @@ public class Ponto {
     private String registro;
 
     @ManyToOne
-    @JoinColumn(name = "situacao_id")
+    @JoinColumn(name = "id_situacao")
     @JsonBackReference
     private Situacao situacao;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "id_usuario")
     @JsonBackReference
     private Usuario usuario;
 

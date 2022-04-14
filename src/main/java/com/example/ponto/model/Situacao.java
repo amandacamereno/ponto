@@ -3,6 +3,7 @@ package com.example.ponto.model;
 
 import javax.persistence.*;
 
+@Entity(name = "situacao")
 public class Situacao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

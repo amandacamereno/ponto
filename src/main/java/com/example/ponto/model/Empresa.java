@@ -1,9 +1,9 @@
 package com.example.ponto.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
+@Entity(name = "empresa")
 public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +14,9 @@ public class Empresa {
     @Column (name = "cnpj")
     private String cnpj;
 
+//    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Usuario> usuarioList;
+
     public Empresa() {
     }
 
@@ -21,6 +24,7 @@ public class Empresa {
         this.id = id;
         this.nomeEmpresa = nomeEmpresa;
         this.cnpj = cnpj;
+
     }
 
     public Integer getId() {
@@ -46,4 +50,5 @@ public class Empresa {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
+
 }

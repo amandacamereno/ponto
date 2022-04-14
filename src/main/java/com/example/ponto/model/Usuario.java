@@ -1,11 +1,8 @@
 package com.example.ponto.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity(name = "usuario")
 public class Usuario {
@@ -25,6 +22,8 @@ public class Usuario {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
+
+
 
     public Usuario() {
     }

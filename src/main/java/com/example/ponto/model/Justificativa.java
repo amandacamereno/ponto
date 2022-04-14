@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.util.List;
 
-
+@Entity (name = "justificativa")
 public class Justificativa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

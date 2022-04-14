@@ -23,6 +23,7 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<Usuario>> findAll() {
         List<Usuario> list = usuarioService.findAll();
+//        Usuario usuario = new Usuario(1, " Claudia", "Santos", "clau", "clau123");
         return ResponseEntity.ok().body(list);
     }
 

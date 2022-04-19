@@ -1,9 +1,12 @@
 package com.example.ponto.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
+
 
 @Entity(name = "ponto")
 public class Ponto {
@@ -11,8 +14,12 @@ public class Ponto {
     @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm:ss.SSSSSS'Z'", timezone = "GMT")
     @Column(name = "registro")
-    private String registro;
+    private Date registro;
 
     @ManyToOne
     @JoinColumn(name = "id_situacao")
@@ -28,7 +35,7 @@ public class Ponto {
     public Ponto() {
     }
 
-    public Ponto(Integer id, String registro, Situacao situacao, Usuario usuario) {
+    public Ponto(Integer id, Date registro, Situacao situacao, Usuario usuario) {
         this.id = id;
         this.registro = registro;
         this.situacao = situacao;
@@ -43,11 +50,11 @@ public class Ponto {
         this.id = id;
     }
 
-    public String getRegistro() {
+    public Date getRegistro() {
         return registro;
     }
 
-    public void setRegistro(String registro) {this.registro = registro;}
+    public void setRegistro(Date registro) {this.registro = registro;}
 
     public Situacao getSituacao() {return situacao;}
 

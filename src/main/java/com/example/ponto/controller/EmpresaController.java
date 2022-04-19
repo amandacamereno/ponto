@@ -25,8 +25,8 @@ public class EmpresaController {
         Optional<Empresa> empresa =empresaService.buscarPorCnpj(cnpj);
 
         if (!empresa.isPresent()) {
-            message.info("Empresa nao encontrada para o CNPJ: {}",cnpj);
-            response.getErrors().add("Empresa nao encontrada para o CNPJ " + cnpj);
+            message.info("Empresa nao encontrada pelo CNPJ: {}",cnpj);
+            response.getErrors().add("Empresa nao encontrada pelo CNPJ " + cnpj);
             return ResponseEntity.badRequest().body(response);
         }
 

@@ -14,8 +14,6 @@ public class Empresa {
     @Column (name = "cnpj")
     private String cnpj;
 
-//    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Usuario> usuarioList;
 
     public Empresa() {
     }

@@ -1,32 +1,27 @@
 package com.example.ponto.dto;
 
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 public class PontoDTO {
+    @NotNull
+    private String tipoBatida;
 
-    private Integer id;
-    private Date registro;
+    @NotNull
+    private String dataRegistro;
 
-    public PontoDTO() {
+    public String getTipoBatida() {
+        return tipoBatida;
     }
 
-    public PontoDTO(Integer id, Date registro) {
-        this.id = id;
-        this.registro = registro;
+    public void setTipoBatida(String tipoBatida) {
+        this.tipoBatida = tipoBatida;
     }
 
-    public Integer getId() {
-        return id;
+    public String getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDataRegistro(String dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
-
-    public Date getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(Date registro) {this.registro = registro;}
-
 }

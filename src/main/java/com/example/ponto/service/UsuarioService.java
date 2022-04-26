@@ -1,45 +1,48 @@
 package com.example.ponto.service;
 
+import com.example.ponto.exception.PontoException;
 import com.example.ponto.model.Usuario;
 import com.example.ponto.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UsuarioService {
-
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-
-    public List<Usuario> findAll() {return usuarioRepository.findAll();}
-
-    public Usuario findById(Integer id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        return usuario.get();
-    }
-
-    public Usuario registro (Usuario obj){
+    public Usuario criar (Usuario obj){
         return usuarioRepository.save(obj);
     }
-
-
-    public Usuario atualizar(Integer id,Usuario obj) {
-       Usuario usuario = usuarioRepository.getOne(id);
-        updateData(usuario,obj);
-        return usuarioRepository.save(usuario);
+    public Optional<Usuario>buscar(int id){
+        Optional<Usuario>obj = usuarioRepository.findById(id);
+        if (!obj.isPresent()){
+            throw new PontoException("id","Usuário não encontrado");
+        }
+        return obj;
     }
 
-    public void deletar(Integer id) {usuarioRepository.deleteById(id);}
+    public Iterable <Usuario> listar(){return  usuarioRepository.findAll();}
 
-    private void updateData(Usuario usuario, Usuario obj) {
-        usuario.setNome(obj.getNome());
-        usuario.setSobrenome(obj.getSobrenome());
-        usuario.setLogin(obj.getLogin());
-        usuario.setSenha(obj.getSenha());
+    public  Usuario editar (int id, Usuario usuario) throws Exception{
+        Optional<Usuario> usuarioSelecionado = usuarioRepository.findById(id);
+        if (!usuarioSelecionado.isPresent()){
+            throw new PontoException("id", "Usuario selecionado para alteração não encontrado");
+        }
+        usuarioSelecionado.get().setNome(Optional.ofNullable(usuario.getNome()).isPresent() ? usuario.getNome()
+                : usuarioSelecionado.get().getNome());
+
+        usuarioSelecionado.get().setSobrenome(Optional.ofNullable(usuario.getSobrenome()).isPresent() ? usuario.getSobrenome()
+                :usuarioSelecionado.get().getSobrenome());
+
+        usuarioSelecionado.get().setLogin(Optional.ofNullable(usuario.getLogin()).isPresent() ? usuario.getLogin()
+                : usuarioSelecionado.get().getLogin());
+
+        usuarioSelecionado.get().setSenha(Optional.ofNullable(usuario.getSenha()).isPresent() ? usuario.getSenha()
+                : usuarioSelecionado.get().getSenha());
+
+        return usuarioRepository.save(usuarioSelecionado.get());
     }
-
 }

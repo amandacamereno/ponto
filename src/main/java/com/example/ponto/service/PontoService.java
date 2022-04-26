@@ -1,42 +1,45 @@
 package com.example.ponto.service;
 
+import com.example.ponto.exception.PontoException;
 import com.example.ponto.model.Ponto;
+import com.example.ponto.model.Usuario;
 import com.example.ponto.repository.PontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PontoService {
-
     @Autowired
     private PontoRepository pontoRepository;
 
+    @Autowired
+    public UsuarioService usuarioService;
 
-    public List<Ponto> findAll() {return pontoRepository.findAll();}
+    public Ponto criar (Ponto ponto){
 
-    public Ponto findById(Integer id) {
-        Optional<Ponto> ponto = pontoRepository.findById(id);
-        return ponto.get();
-    }
+        Usuario usuario = ponto.getUsuario();
 
-    public Ponto registro (Ponto obj){
-        return pontoRepository.save(obj);
-    }
+        Optional<Usuario> usuarioSelecionado = usuarioService.buscar(usuario.getId());
 
+        if (!usuarioSelecionado.isPresent()){
+            throw new PontoException("id", "Usuario não encontrado");
 
-    public Ponto atualizar(Integer id,Ponto obj) {
-        Ponto ponto = pontoRepository.getOne(id);
-        updateData(ponto,obj);
+        }
         return pontoRepository.save(ponto);
     }
 
-    public void deletar(Integer id) {pontoRepository.deleteById(id);}
+    public Iterable<Ponto> consultarPorUsuario(int idUsuario){
 
-    private void updateData(Ponto ponto, Ponto obj) {
-        ponto.setRegistro(obj.getRegistro());
+        Optional<Usuario> usuarioSelecionado = usuarioService.buscar(idUsuario);
+
+            if (!usuarioSelecionado.isPresent()){
+                throw new PontoException("id", "Usuário não encontrado");
+
+            }
+            return pontoRepository.findByUsuario(usuarioSelecionado.get());
+        }
+        public Iterable<Ponto> listar(){return  pontoRepository.findAll();}
     }
 
-}

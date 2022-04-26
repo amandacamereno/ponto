@@ -9,7 +9,7 @@ public class Usuario {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     @Column (name = "id")
-    private Integer id;
+    private int id;
     @Column (name = "nome")
     private String nome;
     @Column(name = "sobrenome")
@@ -28,7 +28,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nome, String sobrenome, String login, String senha, Empresa empresa) {
+    public Usuario(int id, String nome, String sobrenome, String login, String senha, Empresa empresa) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -38,11 +38,11 @@ public class Usuario {
 
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

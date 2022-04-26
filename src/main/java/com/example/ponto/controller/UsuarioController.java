@@ -5,46 +5,33 @@ import com.example.ponto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.List;
-
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/usuario")
 public class UsuarioController {
-    @Autowired
-    private UsuarioService usuarioService;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Usuario>findById(@PathVariable Integer id){
-        Usuario obj = usuarioService.findById(id);
-        return ResponseEntity.ok().body(obj);
-    }
+    @Autowired
+    public UsuarioService usuarioService;
+
     @GetMapping
-    public ResponseEntity<List<Usuario>> findAll() {
-        List<Usuario> list = usuarioService.findAll();
-//        Usuario usuario = new Usuario(1, " Claudia", "Santos", "clau", "clau123");
-        return ResponseEntity.ok().body(list);
-    }
+    public Iterable<Usuario> listar(){ return usuarioService.listar();}
+
+    @GetMapping("/{id}")
+    public Optional<Usuario> buscaPorId(@PathVariable Integer id){return usuarioService.buscar(id);}
 
     @PostMapping
-    public ResponseEntity<Usuario> registro(@RequestBody Usuario obj){
-        obj = usuarioService.registro(obj);
-       // URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        //return ResponseEntity.created(uri).build();
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<Usuario> criar(@RequestBody Usuario obj){
+        obj = usuarioService.criar(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).body(obj);
     }
-
-    @PutMapping ("/{id}")
-    public ResponseEntity<Usuario> atualizar(@PathVariable Integer id, @RequestBody Usuario obj){
-        obj= usuarioService.atualizar(id, obj);
-        return ResponseEntity.ok().body(obj);
+    @PutMapping("/{id}")
+    public Usuario atualizar(@PathVariable ("id") Integer id, @Valid @RequestBody Usuario usuario) throws Exception{
+        return usuarioService.editar(id, usuario);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
-        usuarioService.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
-
 }

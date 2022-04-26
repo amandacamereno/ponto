@@ -9,6 +9,9 @@ public class PontoDTO {
     @NotNull
     private String dataRegistro;
 
+    @NotNull
+    private String justificativa;
+
     public String getTipoBatida() {
         return tipoBatida;
     }
@@ -23,5 +26,13 @@ public class PontoDTO {
 
     public void setDataRegistro(String dataRegistro) {
         this.dataRegistro = dataRegistro;
+    }
+
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
     }
 }

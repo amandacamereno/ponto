@@ -29,11 +29,6 @@ public class Ponto {
     private LocalDateTime registro;
 
     @ManyToOne
-    @JoinColumn(name = "id_situacao")
-    @JsonBackReference
-    private Situacao situacao;
-
-    @ManyToOne
     @JoinColumn(name = "id_usuario")
     @JsonBackReference
     private Usuario usuario;
@@ -44,14 +39,20 @@ public class Ponto {
     private TipoBatida tipoBatida;
 
 
+    @Column (name = "justificativa")
+    private String justificativa;
+
+
+
+
     public Ponto() {
     }
 
-    public Ponto(Integer id, LocalDateTime registro, Situacao situacao, Usuario usuario) {
+    public Ponto(Integer id, LocalDateTime registro, Usuario usuario, String justificativa) {
         this.id = id;
         this.registro = registro;
-        this.situacao = situacao;
         this.usuario = usuario;
+        this.justificativa = justificativa;
     }
 
     public Integer getId() {
@@ -68,9 +69,6 @@ public class Ponto {
 
     public void setRegistro(LocalDateTime registro) {this.registro = registro;}
 
-    public Situacao getSituacao() {return situacao;}
-
-    public void setSituacao(Situacao situacao) {this.situacao = situacao;}
 
     public Usuario getUsuario() {
         return usuario;
@@ -83,6 +81,14 @@ public class Ponto {
     public TipoBatida getTipoBatida() {return tipoBatida;}
 
     public void setTipoBatida(TipoBatida tipoBatida) {this.tipoBatida = tipoBatida;}
+
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
+    }
 
     public static Boolean isTipoValido(String tipoBatida){
         return tipoBatida.toUpperCase().equals(TipoBatida.ENTRADA.name())

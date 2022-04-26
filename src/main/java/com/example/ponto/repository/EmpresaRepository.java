@@ -9,8 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface EmpresaRepository  extends JpaRepository<Empresa, Integer> {
-    Optional<Empresa> findById(Integer id);
-
-    @Transactional(readOnly = true)
-    Empresa  findByCnpj(String cnpj);
 }

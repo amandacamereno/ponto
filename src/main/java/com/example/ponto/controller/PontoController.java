@@ -39,6 +39,7 @@ public class PontoController {
         ponto.setUsuario(usuarioInformado.get());
         ponto.setTipoBatida(TipoBatida.valueOf(pontoDTO.getTipoBatida().toUpperCase()));
         ponto.setRegistro(LocalDateTime.parse(pontoDTO.getDataRegistro()));
+        ponto.setJustificativa(pontoDTO.getJustificativa());
 
         return new ResponseEntity<>(pontoService.criar(ponto), HttpStatus.CREATED);
     }

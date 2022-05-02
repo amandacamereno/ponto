@@ -1,14 +1,11 @@
 package com.example.ponto.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,9 +31,9 @@ public class Ponto {
     private Usuario usuario;
 
     @NotNull
-    @Column (name = "tipobatida")
+    @Column (name = "situacao")
     @Enumerated (EnumType.STRING)
-    private TipoBatida tipoBatida;
+    private Situacao situacao;
 
 
     @Column (name = "justificativa")
@@ -78,9 +75,9 @@ public class Ponto {
         this.usuario = usuario;
     }
 
-    public TipoBatida getTipoBatida() {return tipoBatida;}
+    public Situacao getSituacao() {return situacao;}
 
-    public void setTipoBatida(TipoBatida tipoBatida) {this.tipoBatida = tipoBatida;}
+    public void setSituacao(Situacao situacao) {this.situacao = situacao;}
 
     public String getJustificativa() {
         return justificativa;
@@ -91,8 +88,8 @@ public class Ponto {
     }
 
     public static Boolean isTipoValido(String tipoBatida){
-        return tipoBatida.toUpperCase().equals(TipoBatida.ENTRADA.name())
-                || tipoBatida.toUpperCase().equals(TipoBatida.SAIDA.name());
+        return tipoBatida.toUpperCase().equals(Situacao.ENTRADA.name())
+                || tipoBatida.toUpperCase().equals(Situacao.SAIDA.name());
     }
 
 
@@ -113,14 +110,14 @@ public class Ponto {
 
         for (int i = 0; i < pontos.size() - 1; i++) {
             if (pontos.get(i).getRegistro().isEqual(ponto.getRegistro())
-                    && pontos.get(i).getTipoBatida().equals(TipoBatida.ENTRADA)) {
+                    && pontos.get(i).getSituacao().equals(Situacao.ENTRADA)) {
                 saida = Optional.of(pontos.get(i + 1));
                 break;
             }
         }
 
-        if (ponto.getTipoBatida().equals(TipoBatida.SAIDA) || !saida.isPresent()
-                || saida.get().getTipoBatida().equals(TipoBatida.ENTRADA)) {
+        if (ponto.getSituacao().equals(Situacao.SAIDA) || !saida.isPresent()
+                || saida.get().getSituacao().equals(Situacao.ENTRADA)) {
             return Duration.ofHours(0);
         }
 

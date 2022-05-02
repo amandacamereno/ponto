@@ -41,5 +41,6 @@ public class PontoService {
             return pontoRepository.findByUsuario(usuarioSelecionado.get());
         }
         public Iterable<Ponto> listar(){return  pontoRepository.findAll();}
+
     }
 

@@ -18,19 +18,19 @@ public class UsuarioController {
     @Autowired
     public UsuarioService usuarioService;
 
-    @GetMapping
+    @GetMapping("/admin/{id}")
     public Iterable<Usuario> listar(){ return usuarioService.listar();}
 
     @GetMapping("/{id}")
     public Optional<Usuario> buscaPorId(@PathVariable Integer id){return usuarioService.buscar(id);}
 
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<Usuario> criar(@RequestBody Usuario obj){
         obj = usuarioService.criar(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public Usuario atualizar(@PathVariable ("id") Integer id, @Valid @RequestBody Usuario usuario) throws Exception{
         return usuarioService.editar(id, usuario);
     }

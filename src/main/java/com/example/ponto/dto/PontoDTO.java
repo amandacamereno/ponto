@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class PontoDTO {
     @NotNull
-    private String tipoBatida;
+    private String situacao;
 
     @NotNull
     private String dataRegistro;
@@ -12,12 +12,12 @@ public class PontoDTO {
     @NotNull
     private String justificativa;
 
-    public String getTipoBatida() {
-        return tipoBatida;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setTipoBatida(String tipoBatida) {
-        this.tipoBatida = tipoBatida;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     public String getDataRegistro() {

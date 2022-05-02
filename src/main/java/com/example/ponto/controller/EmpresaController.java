@@ -24,13 +24,17 @@ public class EmpresaController {
     @GetMapping("/{id}")
     public Optional<Empresa> buscaPorId(@PathVariable Integer id){return empresaService.buscar(id);}
 
-    @PostMapping
+//    @GetMapping("/{cnpj}")
+//    public Optional<Empresa> buscaPorCnpj (@PathVariable String cnpj){return empresaService.buscarPorCnpj(cnpj);}
+
+
+    @PostMapping("/admin/criarEmpresa")
     public ResponseEntity<Empresa> criar(@RequestBody Empresa empresa){
         empresa = empresaService.criar(empresa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(empresa.getId()).toUri();
         return ResponseEntity.created(uri).body(empresa);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public Empresa atualizar(@PathVariable ("id") Integer id, @Valid @RequestBody Empresa empresa) throws Exception{
         return empresaService.editar(id, empresa);
     }

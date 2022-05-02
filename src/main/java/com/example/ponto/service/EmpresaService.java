@@ -26,6 +26,14 @@ public class EmpresaService {
         return empresa;
     }
 
+//    public Optional<Empresa> buscarPorCnpj(String cnpj) {
+//        Optional<Empresa> empresa = Optional.ofNullable(empresaRepository.findByCnpj(cnpj));
+//        if (!empresa.isPresent()) {
+//            throw new PontoException("cnpj", "Empresa buscada por cnpj não encontrada");
+//        }
+//        return empresa;
+//    }
+
     public Iterable <Empresa> listar(){return empresaRepository.findAll();}
 
     public  Empresa editar (int id, Empresa empresa) throws Exception{

@@ -1,6 +1,6 @@
 package com.example.ponto.model;
 
-public enum TipoBatida {
+public enum Situacao {
     ENTRADA,
     SAIDA
 }

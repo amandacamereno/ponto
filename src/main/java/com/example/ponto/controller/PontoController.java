@@ -3,7 +3,7 @@ package com.example.ponto.controller;
 import com.example.ponto.dto.ConsultaPontosDTO;
 import com.example.ponto.dto.PontoDTO;
 import com.example.ponto.model.Ponto;
-import com.example.ponto.model.TipoBatida;
+import com.example.ponto.model.Situacao;
 import com.example.ponto.model.Usuario;
 import com.example.ponto.service.PontoService;
 import com.example.ponto.service.UsuarioService;
@@ -32,12 +32,12 @@ public class PontoController {
         Ponto ponto = new Ponto();
         Optional<Usuario> usuarioInformado = usuarioService.buscar(idUsuario);
 
-        if (!Ponto.isTipoValido(pontoDTO.getTipoBatida())) {
+        if (!Ponto.isTipoValido(pontoDTO.getSituacao())) {
             return new ResponseEntity<>("Tipo de Batida deve ser ENTRADA ou SAIDA", HttpStatus.BAD_REQUEST);
         }
 
         ponto.setUsuario(usuarioInformado.get());
-        ponto.setTipoBatida(TipoBatida.valueOf(pontoDTO.getTipoBatida().toUpperCase()));
+        ponto.setSituacao(Situacao.valueOf(pontoDTO.getSituacao().toUpperCase()));
         ponto.setRegistro(LocalDateTime.parse(pontoDTO.getDataRegistro()));
         ponto.setJustificativa(pontoDTO.getJustificativa());
 
@@ -56,7 +56,7 @@ public class PontoController {
 
         return ResponseEntity.ok(consultaPontosDTO);
     }
-    @PutMapping("/{idUsuario}")
+    @PutMapping("/admin/{idUsuario}")
     public Usuario editar(@PathVariable("id") int id, @Valid @RequestBody Usuario usuario) throws Exception {
         return usuarioService.editar(id, usuario);
     }

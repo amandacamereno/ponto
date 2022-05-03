@@ -24,7 +24,7 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public Optional<Usuario> buscaPorId(@PathVariable Integer id){return usuarioService.buscar(id);}
 
-    @PostMapping("/user")
+    @PostMapping
     public ResponseEntity<Usuario> criar(@RequestBody Usuario obj){
         obj = usuarioService.criar(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();

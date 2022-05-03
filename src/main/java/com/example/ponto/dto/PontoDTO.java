@@ -4,35 +4,25 @@ import javax.validation.constraints.NotNull;
 
 public class PontoDTO {
     @NotNull
-    private String situacao;
+    private String tipoBatida;
 
     @NotNull
-    private String dataRegistro;
+    private String dataHoraRegistro;
 
-    @NotNull
-    private String justificativa;
 
-    public String getSituacao() {
-        return situacao;
+    public String getTipoBatida() {
+        return tipoBatida;
     }
 
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
+    public void setTipoBatida(String tipoBatida) {
+        this.tipoBatida = tipoBatida;
     }
 
-    public String getDataRegistro() {
-        return dataRegistro;
+    public String getDataHoraRegistro() {
+        return dataHoraRegistro;
     }
 
-    public void setDataRegistro(String dataRegistro) {
-        this.dataRegistro = dataRegistro;
-    }
-
-    public String getJustificativa() {
-        return justificativa;
-    }
-
-    public void setJustificativa(String justificativa) {
-        this.justificativa = justificativa;
+    public void setDataHoraRegistro(String dataHoraRegistro) {
+        this.dataHoraRegistro = dataHoraRegistro;
     }
 }

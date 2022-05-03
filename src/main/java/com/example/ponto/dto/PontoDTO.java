@@ -3,12 +3,23 @@ package com.example.ponto.dto;
 import javax.validation.constraints.NotNull;
 
 public class PontoDTO {
+
     @NotNull
     private String tipoBatida;
 
     @NotNull
     private String dataHoraRegistro;
 
+    @NotNull
+    private String justifica;
+
+    public String getJustifica() {
+        return justifica;
+    }
+
+    public void setJustifica(String justifica) {
+        this.justifica = justifica;
+    }
 
     public String getTipoBatida() {
         return tipoBatida;

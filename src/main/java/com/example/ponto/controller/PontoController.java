@@ -41,10 +41,10 @@ public class PontoController {
         ponto.setUsuario(usuarioInformado.get());
         ponto.setTipoBatida(TipoBatida.valueOf(pontoDTO.getTipoBatida().toUpperCase()));
         ponto.setDataHoraRegistro(LocalDateTime.parse(pontoDTO.getDataHoraRegistro()));
+        ponto.setJustifica(pontoDTO.getJustifica());
 
         return new ResponseEntity<>(pontoService.criar(ponto), HttpStatus.CREATED);
     }
-
     @GetMapping("/{idUsuario}")
     public ResponseEntity<ConsultaPontosDTO> consultarPorUsuario(@PathVariable("idUsuario") int idUsuario)
             throws Exception {
@@ -58,10 +58,7 @@ public class PontoController {
 
         return ResponseEntity.ok(consultaPontosDTO);
     }
-    @GetMapping("/{id}")
-    public Optional<Usuario> consultarPorId(@PathVariable int id){
-        return usuarioService.buscar(id);
-    }
+
 
     @PutMapping("/{id}")
     public Usuario editar(@PathVariable("id") int id, @Valid @RequestBody Usuario usuario) throws Exception {

@@ -26,8 +26,8 @@ private UserDetailsService userDetailsService;
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers( "/empresa/admin/**", "/ponto/admin/**", "/usuario/admin/**").hasRole("ADMIN")
-                .antMatchers("/empresa/**", "/ponto/**", "/usuario/**").hasRole("USER")
+                .antMatchers( "/empresa/admin/**", "/espelho/admin/**", "/usuario/admin/**").hasRole("ADMIN")
+                .antMatchers("/empresa/**", "/espelho/**", "/usuario/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

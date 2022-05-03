@@ -11,36 +11,38 @@ import java.util.Optional;
 
 @Service
 public class PontoService {
+
     @Autowired
     private PontoRepository pontoRepository;
 
     @Autowired
     public UsuarioService usuarioService;
 
-    public Ponto criar (Ponto ponto){
+    public Ponto criar(Ponto ponto) {
 
         Usuario usuario = ponto.getUsuario();
 
         Optional<Usuario> usuarioSelecionado = usuarioService.buscar(usuario.getId());
 
-        if (!usuarioSelecionado.isPresent()){
-            throw new PontoException("id", "Usuario não encontrado");
-
+        if (!usuarioSelecionado.isPresent()) {
+            throw new PontoException("Id", "Usuário não encontrado");
         }
+
         return pontoRepository.save(ponto);
+
     }
 
-    public Iterable<Ponto> consultarPorUsuario(int idUsuario){
+    public  Iterable<Ponto> consultarPorUsuario(int idUsuario) {
 
         Optional<Usuario> usuarioSelecionado = usuarioService.buscar(idUsuario);
 
-            if (!usuarioSelecionado.isPresent()){
-                throw new PontoException("id", "Usuário não encontrado");
-
-            }
-            return pontoRepository.findByUsuario(usuarioSelecionado.get());
+        if (!usuarioSelecionado.isPresent()) {
+            throw new PontoException("Id", "Usuário não encontrado");
         }
-        public Iterable<Ponto> listar(){return  pontoRepository.findAll();}
 
+        return pontoRepository.findByUsuario(usuarioSelecionado.get());
     }
+
+    public Iterable<Ponto> listar() {return pontoRepository.findAll();}
+}
 

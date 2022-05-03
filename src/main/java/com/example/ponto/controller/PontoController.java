@@ -3,7 +3,7 @@ package com.example.ponto.controller;
 import com.example.ponto.dto.ConsultaPontosDTO;
 import com.example.ponto.dto.PontoDTO;
 import com.example.ponto.model.Ponto;
-import com.example.ponto.model.Situacao;
+import com.example.ponto.model.TipoBatida;
 import com.example.ponto.model.Usuario;
 import com.example.ponto.service.PontoService;
 import com.example.ponto.service.UsuarioService;
@@ -16,33 +16,35 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping(value = "/espelho")
 public class PontoController {
-    @Autowired
-    private UsuarioService usuarioService;
 
     @Autowired
     private PontoService pontoService;
 
-    @PostMapping ("/{idUsuario}")
+    @Autowired
+    UsuarioService usuarioService;
+
+    @PostMapping("/{idUsuario}")
     public ResponseEntity<?> cadastrar(@PathVariable("idUsuario") int idUsuario, @Valid @RequestBody PontoDTO pontoDTO)
             throws Exception {
 
         Ponto ponto = new Ponto();
         Optional<Usuario> usuarioInformado = usuarioService.buscar(idUsuario);
 
-        if (!Ponto.isTipoValido(pontoDTO.getSituacao())) {
+        if (!Ponto.isTipoValido(pontoDTO.getTipoBatida())) {
             return new ResponseEntity<>("Tipo de Batida deve ser ENTRADA ou SAIDA", HttpStatus.BAD_REQUEST);
         }
 
         ponto.setUsuario(usuarioInformado.get());
-        ponto.setSituacao(Situacao.valueOf(pontoDTO.getSituacao().toUpperCase()));
-        ponto.setRegistro(LocalDateTime.parse(pontoDTO.getDataRegistro()));
-        ponto.setJustificativa(pontoDTO.getJustificativa());
+        ponto.setTipoBatida(TipoBatida.valueOf(pontoDTO.getTipoBatida().toUpperCase()));
+        ponto.setDataHoraRegistro(LocalDateTime.parse(pontoDTO.getDataHoraRegistro()));
 
         return new ResponseEntity<>(pontoService.criar(ponto), HttpStatus.CREATED);
     }
+
     @GetMapping("/{idUsuario}")
     public ResponseEntity<ConsultaPontosDTO> consultarPorUsuario(@PathVariable("idUsuario") int idUsuario)
             throws Exception {
@@ -56,8 +58,16 @@ public class PontoController {
 
         return ResponseEntity.ok(consultaPontosDTO);
     }
-    @PutMapping("/admin/{idUsuario}")
+    @GetMapping("/{id}")
+    public Optional<Usuario> consultarPorId(@PathVariable int id){
+        return usuarioService.buscar(id);
+    }
+
+    @PutMapping("/{id}")
     public Usuario editar(@PathVariable("id") int id, @Valid @RequestBody Usuario usuario) throws Exception {
         return usuarioService.editar(id, usuario);
     }
+
+
 }
+

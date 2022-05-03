@@ -19,30 +19,31 @@ public class Ponto {
     @Column(name = "idponto")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(name = "nomefuncionario")
-    private String nome;
-    @Column(name = "sobrenomefuncionario")
-    private String sobrenome;
+
 
     // @CreationTimestamp
     //@Temporal(TemporalType.TIMESTAMP)
     // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm:ss.SSSSSS'Z'", timezone = "GMT")
-    @Column(name = "horaregistro")
+    @Column(name = "registro")
     private LocalDateTime dataHoraRegistro;
+
 
     @Column(name = "tipobatida")
     @NotNull
     @Enumerated(EnumType.STRING)
     private TipoBatida tipoBatida;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Column(name = "justificativa")
+    private String justifica;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Usuario usuario;
 
-    public Ponto(int id,String nome,String sobrenome,LocalDateTime dataHoraRegistro) {
+    public Ponto(int id,LocalDateTime dataHoraRegistro,String justifica) {
         this.id = id;
-        this.nome = nome;
-        this.sobrenome =sobrenome;
         this.dataHoraRegistro = dataHoraRegistro;
+        this.justifica = justifica;
     }
 
     public Ponto() {
@@ -55,22 +56,6 @@ public class Ponto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
 
     public LocalDateTime getDataHoraRegistro() {
@@ -95,6 +80,14 @@ public class Ponto {
 
     public void setTipoBatida(TipoBatida tipoBatida) {
         this.tipoBatida = tipoBatida;
+    }
+
+    public String getJustifica() {
+        return justifica;
+    }
+
+    public void setJustifica(String justifica) {
+        this.justifica = justifica;
     }
 
     public static Boolean isTipoValido(String tipoBatida){

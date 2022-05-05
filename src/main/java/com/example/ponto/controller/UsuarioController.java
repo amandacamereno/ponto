@@ -18,7 +18,7 @@ public class UsuarioController {
     @Autowired
     public UsuarioService usuarioService;
 
-    @GetMapping("/admin/{id}")
+    @GetMapping("/admin")
     public Iterable<Usuario> listar(){ return usuarioService.listar();}
 
     @GetMapping("/{id}")

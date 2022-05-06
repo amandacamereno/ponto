@@ -28,13 +28,13 @@ public class EmpresaController {
 //    public Optional<Empresa> buscaPorCnpj (@PathVariable String cnpj){return empresaService.buscarPorCnpj(cnpj);}
 
 
-    @PostMapping("/admin/criarEmpresa")
+    @PostMapping("/criarEmpresa")
     public ResponseEntity<Empresa> criar(@RequestBody Empresa empresa){
         empresa = empresaService.criar(empresa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(empresa.getId()).toUri();
         return ResponseEntity.created(uri).body(empresa);
     }
-    @PutMapping("/admin/{id}")
+    @PutMapping("/{id}")
     public Empresa atualizar(@PathVariable ("id") Integer id, @Valid @RequestBody Empresa empresa) throws Exception{
         return empresaService.editar(id, empresa);
     }

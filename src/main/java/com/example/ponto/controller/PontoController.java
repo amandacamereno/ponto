@@ -22,10 +22,10 @@ import java.util.Optional;
 public class PontoController {
 
     @Autowired
-    private PontoService pontoService;
+    PontoService pontoService;
 
     @Autowired
-    UsuarioService usuarioService;
+     UsuarioService usuarioService;
 
     @PostMapping("/{idUsuario}")
     public ResponseEntity<?> cadastrar(@PathVariable("idUsuario") int idUsuario, @Valid @RequestBody PontoDTO pontoDTO)

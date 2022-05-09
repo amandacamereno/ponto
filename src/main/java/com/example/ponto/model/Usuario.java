@@ -2,6 +2,7 @@ package com.example.ponto.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity(name = "usuario")
@@ -10,12 +11,16 @@ public class Usuario {
     @GeneratedValue (strategy = GenerationType.AUTO)
     @Column (name = "id")
     private int id;
+//    @NotNull
     @Column (name = "nome")
     private String nome;
+//    @NotNull
     @Column(name = "sobrenome")
     private String sobrenome;
+    @NotNull
     @Column(name = "login")
     private String login;
+    @NotNull
     @Column(name = "senha")
     private String senha;
 

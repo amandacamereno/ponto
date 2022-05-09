@@ -23,7 +23,24 @@ public class UsuarioService {
         }
         return obj;
     }
+    public String buscarUsuario(String login, String senha){
+        Optional<Usuario>obj = Optional.ofNullable(usuarioRepository.findByLoginAndSenha(login, senha));
+        if (!obj.isPresent()){
+            throw new PontoException("usuario","Usuário não encontrado");
+        }
+//        System.out.println(obj.get().getSenha());
+        if (obj.get().getSenha().equals(senha)){
+//           System.out.println("passou");
+            return "Usuario existente";
+        } else { throw new PontoException("senha", "senha inválida");
 
+        }
+
+    }
+
+//    public Usuario buscarUsuario (Usuario usuario){
+//        return usuarioRepository.save(usuario);
+//    }
     public Iterable <Usuario> listar(){return  usuarioRepository.findAll();}
 
     public  Usuario editar (int id, Usuario usuario) throws Exception{

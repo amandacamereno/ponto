@@ -24,6 +24,27 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public Optional<Usuario> buscaPorId(@PathVariable Integer id){return usuarioService.buscar(id);}
 
+    @PostMapping("/auth")
+    public String  buscarUsuario(@RequestBody Usuario obj){
+        System.out.println(obj.getLogin());
+        System.out.println(obj.getSenha());
+//        String resposta = usuarioService.buscarUsuario(obj.getId(), obj.getSenha());
+        return usuarioService.buscarUsuario(obj.getLogin(), obj.getSenha());
+    }
+
+//    @PostMapping( "/auth")
+//    @ResponseBody
+//    public Usuario login ( Usuario usuario){
+//        return usuarioService.buscarUsuario(usuario);
+//    }
+
+//    @PostMapping
+//    public ResponseEntity<Usuario> login (@RequestBody Usuario obj){
+//        obj = usuarioService.criar(obj);
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+//        return ResponseEntity.created(uri).body(obj);
+//    }
+
     @PostMapping
     public ResponseEntity<Usuario> criar(@RequestBody Usuario obj){
         obj = usuarioService.criar(obj);

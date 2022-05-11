@@ -45,6 +45,7 @@ public class PontoController {
 
         return new ResponseEntity<>(pontoService.criar(ponto), HttpStatus.CREATED);
     }
+
     @GetMapping("/{idUsuario}")
     public ResponseEntity<ConsultaPontosDTO> consultarPorUsuario(@PathVariable("idUsuario") int idUsuario)
             throws Exception {
@@ -58,6 +59,8 @@ public class PontoController {
 
         return ResponseEntity.ok(consultaPontosDTO);
     }
+//    @GetMapping("/login")
+//    public String buscarPorLogin(@PathVariable String login, String senha){return pontoService.buscarLogin(login, senha);}
 
 
     @PutMapping("/{id}")

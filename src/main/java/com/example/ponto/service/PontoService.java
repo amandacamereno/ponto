@@ -15,6 +15,8 @@ public class PontoService {
     @Autowired
     private PontoRepository pontoRepository;
 
+
+
     @Autowired
     public UsuarioService usuarioService;
 
@@ -31,6 +33,20 @@ public class PontoService {
         return pontoRepository.save(ponto);
 
     }
+//    public String buscarLogin(String login, String senha){
+//        Optional<Usuario>obj = Optional.ofNullable(pontoRepository.findByLoginAndSenha(login, senha));
+//        if (!obj.isPresent()){
+//            throw new PontoException("login","Login não encontrado");
+//        }
+////        System.out.println(obj.get().getSenha());
+//        if (obj.get().getSenha().equals(senha)){
+////           System.out.println("passou");
+//            return "Login existente";
+//        } else { throw new PontoException("senha", "senha inválida");
+//
+//        }
+//
+//    }
 
     public  Iterable<Ponto> consultarPorUsuario(int idUsuario) {
 
@@ -42,6 +58,7 @@ public class PontoService {
 
         return pontoRepository.findByUsuario(usuarioSelecionado.get());
     }
+
 
     public Iterable<Ponto> listar() {return pontoRepository.findAll();}
 }

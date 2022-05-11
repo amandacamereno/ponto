@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface PontoRepository extends JpaRepository<Ponto, Integer> {
 
     Iterable<Ponto> findByUsuario(Usuario usuario);
+
+//    Usuario findByLoginAndSenha(String login, String senha);
 }
 
